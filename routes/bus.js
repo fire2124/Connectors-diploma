@@ -28,7 +28,6 @@ router.get("/", async (req, res) => {
       zaznam.CurrentTime = currentTime;
       array.push(zaznam);
     }
-
     res.send(array);
   });
 
@@ -37,39 +36,28 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  //put bus into the database
-  //const { error } = validate(req.body);
-  //if (error) return res.status(400).send(error.details[0].message);
+  const { error } = validate(req.body); 
+  if (error) return res.status(400).send(error.details[0].message);
 
-  await request(options, async function (error, response, body) {
-    if (error) throw new Error(error);
-    let array = [];
-    let globalObject = JSON.parse(body);
-    globalObject = globalObject.busses;
-    let time = new Date();
-    let currentTime = time.getTime();
-    let count = 0;
-
-    try {
-      for (let zaznam of globalObject) {
-        zaznam.Id = ++count;
-        zaznam.Type = "MHD";
-        zaznam.CurrentTime = currentTime;
-
-        const { error } = validate(zaznam);
-        if (error) return res.status(400).send(error.details[0].message);
-
-        let bus = new Bus(zaznam);
-        console.log(bus);
-        bus1 = await bus.save();
-        res.send(bus1);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    //res.send(array);
+  let customer = new Bus({ 
+    number: req.body.number,
+    numberAlt: req.body.numberAlt,
+    direction: req.body.direction,
+    lat: req.body.lat,
+    lng: req.body.lng,
+    departure: req.body.departure,
+    delay: req.body.delay,
+    vehicle: req.body.vehicle,
+    station: req.body.station,
+    isTechnical: req.body.isTechnical,
+    Id: req.body.Id,
+    Type: req.body.Type,
+    CurrentTime: req.body.CurrentTime,
   });
-});
+  customer = await customer.save();
+    res.send(req);
+  });
+
 
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
@@ -117,6 +105,7 @@ router.get("/:id", async (req, res) => {
   if (!bus)
     return res.status(404).send("The bus with the given ID was not found.");
 
+ 
   res.send(bus);
 });
 
