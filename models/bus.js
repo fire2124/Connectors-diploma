@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-const Bus = mongoose.model('Bus', new mongoose.Schema({
+const MhdPoBus = mongoose.model('MhdPoBus', new mongoose.Schema({
   number: {
     type: String,
     required: true,
@@ -57,7 +57,7 @@ const Bus = mongoose.model('Bus', new mongoose.Schema({
     required: true,
     maxlength: 10
   },
-  Id: {
+  OrderInJsonId: {
     type: Number,
     required: true,
   },
@@ -75,7 +75,7 @@ const Bus = mongoose.model('Bus', new mongoose.Schema({
   
 }));
 
-function validateCustomer(bus) {
+function validateBus(bus) {
   const schema = {
     number: Joi.string().min(1).max(5).required(),
     numberAlt: Joi.optional(),
@@ -87,7 +87,7 @@ function validateCustomer(bus) {
     vehicle: Joi.number().required(),
     station: Joi.string().required(),
     isTechnical: Joi.boolean(),
-    Id: Joi.number().required(),
+    OrderInJsonId: Joi.number().required(),
     Type: Joi.string().required(),
     CurrentTime: Joi.number().required(),
   };
@@ -95,5 +95,5 @@ function validateCustomer(bus) {
   return Joi.validate(bus, schema);
 }
 
-exports.Bus = Bus; 
-exports.validate = validateCustomer;
+exports.MhdPoBus = MhdPoBus; 
+exports.validate = validateBus;

@@ -1,4 +1,4 @@
-const { Bus, validate } = require("../models/bus");
+const { MhdPoBus, validate } = require("../models/bus");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
     let currentTime = time.getTime();
     let count = 0;
     for (let zaznam of globalObject) {
-      zaznam.Id = ++count;
+      zaznam.OrderInJsonId = ++count;
       zaznam.Type = "MHD";
       zaznam.CurrentTime = currentTime;
       array.push(zaznam);
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
-  let customer = new Bus({ 
+  let mhdPoBus = new MhdPoBus({ 
     number: req.body.number,
     numberAlt: req.body.numberAlt,
     direction: req.body.direction,
@@ -50,11 +50,11 @@ router.post("/", async (req, res) => {
     vehicle: req.body.vehicle,
     station: req.body.station,
     isTechnical: req.body.isTechnical,
-    Id: req.body.Id,
+    OrderInJsonId: req.body.OrderInJsonId,
     Type: req.body.Type,
     CurrentTime: req.body.CurrentTime,
   });
-  customer = await customer.save();
+  mhdPoBus = await mhdPoBus.save();
     res.send(req);
   });
 
@@ -63,7 +63,7 @@ router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const bus = await Bus.findByIdAndUpdate(
+  const bus = await MhdPoBus.findByIdAndUpdate(
     req.params.id,
     {
       number: req.body.number,
@@ -76,7 +76,7 @@ router.put("/:id", async (req, res) => {
       vehicle: req.body.vehicle,
       station: req.body.station,
       isTechnical: req.body.isTechnical,
-      Id: req.body.Id,
+      OrderInJsonId: req.body.OrderInJsonId,
       Type: req.body.Type,
       CurrentTime: req.body.CurrentTime,
     },
@@ -90,7 +90,7 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const bus = await Bus.findByIdAndRemove(req.params.id);
+  const bus = await MhdPoBus.findByIdAndRemove(req.params.id);
 
   if (!bus)
     return res.status(404).send("The bus with the given ID was not found.");
@@ -99,7 +99,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-  const bus = await Bus.findById(req.params.Id);
+  const bus = await MhdPoBus.findById(req.params.Id);
   console.log(bus);
 
   if (!bus)
