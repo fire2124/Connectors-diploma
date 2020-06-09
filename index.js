@@ -5,8 +5,8 @@ const MhdBusses = require('./routes/bus');
 const SadBusses = require('./routes/sad');
 const Trains = require('./routes/train');
 const traffic = require('./routes/traffic');
-// const weatherPO = require('./routes/weatherPO');
-// const weatherKE = require('./routes/weatherKE');
+const weatherPO = require('./routes/weatherPo');
+const weatherKE = require('./routes/weatherKe');
 
 const express = require('express');
 const app = express();
@@ -16,12 +16,12 @@ mongoose.connect('mongodb://localhost/connectors')
   .catch(err => console.error('Could not connect to MongoDB...'));
 
 app.use(express.json());
-app.use('/api/currentMhdPoBusses', MhdBusses);
-app.use('/api/currentSadPoBusses', SadBusses);
-app.use('/api/currentTrains', Trains);
-app.use('/api/currentTraffic', traffic);
-// app.use('/api/currentWeatherPO', weatherPO);
-// app.use('/api/currentWeatherKE', weatherKE);
+app.use('/api/v1/currentMhdPoBusses', MhdBusses);
+app.use('/api/v1/currentSadPoBusses', SadBusses);
+app.use('/api/v1/currentTrains', Trains);
+app.use('/api/v1/currentTraffic', traffic);
+app.use('/api/v1/currentWeatherPo', weatherPO);
+app.use('/api/v1/currentWeatherKe', weatherKE);
 
 
 const port = process.env.PORT || 3000;
