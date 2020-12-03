@@ -3,43 +3,24 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-let request = require("request");
-let options = {
-  method: "GET",
-  url: "https://mhdpresov.sk/getGPSBusses",
-  headers: {},
-};
+let busAll = [];
 
-router.get("/", async (req, res) => {
-  // get current busses
-
-  await request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-
-    let array = [];
-    let globalObject = JSON.parse(body);
-    globalObject = globalObject.busses;
-    let time = new Date();
-    let currentTime = time.getTime();
-    let count = 0;
-    for (let zaznam of globalObject) {
-      zaznam.OrderInJsonId = ++count;
-      zaznam.Type = "MHD";
-      zaznam.CurrentTime = currentTime;
-      array.push(zaznam);
-    }
-    res.send(array);
-  });
-
-  //const buss = await bus.find().sort('name');
-  //res.send(buss);
+//for ChangeOfVariation
+router.get("/firstJSON/1", async (req, res) => {
+  res.send(busAll);
+});
+//for ChangeOfVariation
+router.post("/firstJSON/1", async (req, res) => {
+  console.log(req.body);
+  busAll = req.body;
 });
 
 router.post("/", async (req, res) => {
-  const { error } = validate(req.body); 
+  let bussAll = [];
+  const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let mhdPoBus = new MhdPoBus({ 
+  let mhdPoBus = new MhdPoBus({
     number: req.body.number,
     numberAlt: req.body.numberAlt,
     direction: req.body.direction,
@@ -55,9 +36,9 @@ router.post("/", async (req, res) => {
     CurrentTime: req.body.CurrentTime,
   });
   mhdPoBus = await mhdPoBus.save();
-    res.send(req);
-  });
-
+  res.send(req);
+  bussAll.push(mhdPoBus);
+});
 
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
@@ -105,7 +86,6 @@ router.get("/:id", async (req, res) => {
   if (!bus)
     return res.status(404).send("The bus with the given ID was not found.");
 
- 
   res.send(bus);
 });
 

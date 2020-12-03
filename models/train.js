@@ -30,10 +30,15 @@ const Train = mongoose.model('Train', new mongoose.Schema({
     type: Number,
     required: true,
   },
+  PotvrdenyOdj: {
+    type: Boolean,
+    required: false,
+  },
   OrderInStation: {
     type: Number,
     required: true,
   },
+  
   CasDay: {
     type: String,
     optional:true,
@@ -92,6 +97,7 @@ function validateTrain(train) {
     Poznamka: Joi.optional(),
     Angle: Joi.number().required(),
     OrderInStation: Joi.number().required(),
+    PotvrdenyOdj: Joi.optional(),
     CasDay: Joi.string().optional(),
     CasTime: Joi.string().optional(),
     CasPlanDay: Joi.string().optional(),
