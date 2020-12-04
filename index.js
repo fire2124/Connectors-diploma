@@ -8,6 +8,8 @@ const traffic = require('./routes/traffic');
 const weatherPO = require('./routes/weatherPo');
 const weatherKE = require('./routes/weatherKe');
 const Street  = require('./routes/street')
+//const Ubian  = require('./routes/ubian')
+
 const express = require('express');
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(express.json());
 app.use("/api/v1/PresovStreets",Street)
 app.use('/api/v1/currentMhdPoBusses', MhdBusses);
 app.use('/api/v1/currentSadPoBusses', SadBusses);
+//app.use('/api/v1/currentSadPoBackup', Ubian);
 app.use('/api/v1/currentTrains', Trains);
 app.use('/api/v1/currentTraffic', traffic);
 app.use('/api/v1/currentWeatherPo', weatherPO);
