@@ -1,118 +1,131 @@
-const Joi = require('joi');
-const mongoose = require('mongoose');
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
-const Train = mongoose.model('Train', new mongoose.Schema({
-  Nazov: {
-    type: String,
-    required: true,
-  },
-  Meska: {
-    type: Number,
-    required: false,
-  },
-  MeskaText: {
-    type: String,
-    required: true,
-  },
-  InfoZoStanice: {
-    type: String,
-    required: true,
-  },
-  Dopravca:{
-    type: String,
-    required:true,
-  },
-  Poznamka: {
-    type: String,
-    optional:true,
-  },
-  Angle: {
-    type: Number,
-    required: true,
-  },
-  PotvrdenyOdj: {
-    type: Boolean,
-    required: false,
-  },
-  OrderInStation: {
-    type: Number,
-    required: true,
-  },
-  
-  CasDay: {
-    type: String,
-    optional:true,
-  },
-  CasTime: {
-    type: String,
-    optional:true,
-  },
-  CasPlanDay: {
-    type: String,
-    optional:true,
-  },
-  CasPlanTime: {
-    type: String,
-    optional:true,
-  },
-  Lat: {
-    type: Number,
-    required: true,
-  },
-  Lng: {
-    type: Number,
-    required: true,
-  },
-  From: {
-    type: String,
-    required: true,
-  },
-  To: {
-    type: String,
-    required: true,
-  },
-  OrderInJsonId: {
-    type: Number,
-    required: true,
-  },
-  Type: {
-    type: String,
-    required: true,
-  },
-  CurrentTime: {
-    type: Number,
-    required: true,
-  },
-
-  
-}));
+const Train = mongoose.model(
+  "Train",
+  new mongoose.Schema({
+    type: {
+      type: String,
+      required: false,
+    },
+    geometry: {
+      coordinates: {
+        type: Array,
+        required: false,
+      },
+      type: {
+        type: String,
+        required: false,
+      },
+    },
+    properties: {
+      Nazov: {
+        type: String,
+        required: false,
+      },
+      Meska: {
+        type: Number,
+        required: false,
+      },
+      MeskaText: {
+        type: String,
+        required: false,
+      },
+      Current_Stop: {
+        type: String,
+        required: false,
+      },
+      Dopravca: {
+        type: String,
+        required: false,
+      },
+      Angle: {
+        type: Number,
+        required: false,
+      },
+      Order_In_Station: {
+        type: Number,
+        required: false,
+      },
+      PotvrdenyOdj: {
+        type: Boolean,
+        required: false,
+      },
+      CasDay: {
+        type: String,
+        required: false,
+      },
+      CasTime: {
+        type: String,
+        required: false,
+      },
+      CasPlanDay: {
+        type: String,
+        required: false,
+      },
+      CasPlanTime: {
+        type: String,
+        required: false,
+      },
+      From: {
+        type: String,
+        required: false,
+      },
+      To: {
+        type: String,
+        required: false,
+      },
+      Current_Time: {
+        type: Number,
+        required: false,
+      },
+      Type: {
+        type: String,
+        required: false,
+      },
+      Order_In_JsonId: {
+        type: Number,
+        required: false,
+      },
+      CHANGE_OF_Variation: {
+        type: Number,
+        required: false,
+      },
+    },
+  })
+);
 
 function validateTrain(train) {
   const schema = {
-    Nazov: Joi.string().required(),
-    Meska: Joi.number().required(),
-    MeskaText: Joi.string().required(),
-    InfoZoStanice: Joi.string().required(),
-    Dopravca: Joi.string().required(),
-    Poznamka: Joi.optional(),
-    Angle: Joi.number().required(),
-    OrderInStation: Joi.number().required(),
-    PotvrdenyOdj: Joi.optional(),
-    CasDay: Joi.string().optional(),
-    CasTime: Joi.string().optional(),
-    CasPlanDay: Joi.string().optional(),
-    CasPlanTime: Joi.string().optional(),
-    Lat: Joi.number().required(),
-    Lng: Joi.number().required(),
-    From: Joi.string().required(),
-    To: Joi.string().required(),
-    OrderInJsonId: Joi.number().required(),
-    Type: Joi.string().required(),
-    CurrentTime: Joi.number().required(),
+    type: Joi.string().optional(),
+    geometry: {
+      coordinates: Joi.array().optional(),
+      type: Joi.string().optional(),
+    },
+    properties: {
+      Nazov: Joi.string().optional(),
+      Meska: Joi.number().optional(),
+      MeskaText: Joi.string().optional(),
+      Current_Stop: Joi.string().optional(),
+      Dopravca: Joi.string().optional(),
+      Angle: Joi.number().optional(),
+      Order_In_Station: Joi.number().optional(),
+      PotvrdenyOdj: Joi.boolean().optional(),
+      CasDay: Joi.string().optional(),
+      CasTime:Joi.string().optional(),
+      CasPlanDay: Joi.string().optional(),
+      CasPlanTime: Joi.string().optional(),
+      From: Joi.string().optional(),
+      To: Joi.string().optional(),
+      Current_Time: Joi.number().optional(),
+      Type: Joi.string().optional(),
+      Order_In_JsonId: Joi.number().optional(),
+      CHANGE_OF_Variation: Joi.number().optional(),
+    },
   };
 
   return Joi.validate(train, schema);
 }
 
-exports.Train = Train; 
+exports.Train = Train;
 exports.validate = validateTrain;

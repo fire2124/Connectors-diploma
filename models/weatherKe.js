@@ -1,145 +1,136 @@
-const Joi = require('joi');
-const mongoose = require('mongoose');
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
-const WeatherKE = mongoose.model('WeatherKE', new mongoose.Schema({
-  base: {
-    type: String,
-    required: true,
-  },
-  visibility: {
-    type: Number,
-    optional: true,
-  },
-  dt: {
-    type: Number,
-    required: true,
-  },
-  timezone: {
-    type: Number,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  cod: {
-    type: Number,
-    required: true,
-  },
-  Id: {
-    type: Number,
-    required: true,
-  },
-  Type: {
-    type: String,
-    required: true,
-  },
-  CurrentTime: {
-    type: Number,
-    required: true,
-  },
-  Lat: {
-    type: Number,
-    required: true,
-  },
-  Lng: {
-    type: Number,
-    required: true,
-  },
-  Weather_Id: {
-    type: Number,
-    required: true,
-  },
-  Weather_Main: {
-    type: String,
-    required: true,
-  },
-  Weather_Description: {
-    type: String,
-    required: true,
-  },
-  Weather_Icon: {
-    type: String,
-    required: true,
-  },
-  Main_Temp:{
-    type: Number,
-    required:true,   
-  },
-  Main_FeelsLike:{
-    type: Number,
-    required:true,   
-  },
-  Main_TempMax:{
-    type: Number,
-    required:true,   
-  },
-  Main_TempMin:{
-    type: Number,
-    required:true,   
-  },
-  Main_Pressure:{
-    type: Number,
-    required:true,   
-  },
-  Main_Humidity:{
-    type: Number,
-    required:true,   
-  },
-  Wind_Speed:{
-    type: Number,
-    required:true,   
-  },
-  Clouds_All:{
-    type: Number,
-    required:true,   
-  },
-  Sunrise:{
-    type: Number,
-    required:true,   
-  },
-  Sunset:{
-    type: Number,
-    required:true,   
-  },
-  Rain_1h:{
-    type: Number,
-    optional: true,
-  },
-}));
+const WeatherKE = mongoose.model(
+  "WeatherKE",
+  new mongoose.Schema({
+    type: {
+      type: String,
+      required: false,
+    },
+    geometry: {
+      type: {
+        type: String,
+        required: false,
+      },
+      coordinates: {
+        type: Array,
+        required: false,
+      },
+    },
+    properties: {
+      Id: {
+        type: Number,
+        required: false,
+      },
+      Type: {
+        type: String,
+        required: false,
+      },
+      Weather_Id: {
+        type: Number,
+        required: false,
+      },
+      Weather_Main: {
+        type: String,
+        required: false,
+      },
+      Weather_Description: {
+        type: String,
+        required: false,
+      },
+      Weather_Icon: {
+        type: String,
+        required: false,
+      },
+      Main_Temp: {
+        type: Number,
+        required: false,
+      },
+      Main_FeelsLike: {
+        type: Number,
+        required: false,
+      },
+      Main_TempMax: {
+        type: Number,
+        required: false,
+      },
+      Main_TempMin: {
+        type: Number,
+        required: false,
+      },
+      Main_Pressure: {
+        type: Number,
+        required: false,
+      },
+      Main_Humidity: {
+        type: Number,
+        required: false,
+      },
+      Wind_Speed: {
+        type: Number,
+        required: false,
+      },
+      Clouds_All: {
+        type: Number,
+        required: false,
+      },
+      Sunrise: {
+        type: Number,
+        required: false,
+      },
+      Sunset: {
+        type: Number,
+        required: false,
+      },
+      Current_Time: {
+        type: Number,
+        required: false,
+      },
+      Visibility: {
+        type: Number,
+        required: false,
+      },
+      Rain_1h: {
+        type: Number,
+        required: false,
+      },
+    },
+  })
+);
 
 function validateWeatherKe(weather) {
   const schema = {
-    base: Joi.string().required(),
-    visibility: Joi.number().optional(),
-    dt: Joi.number().required(),
-    timezone: Joi.number().required(),
-    name: Joi.string().required(),
-    cod: Joi.number().required(),
-    Id: Joi.number().required(),
-    Type: Joi.string().required(),
-    CurrentTime: Joi.number().required(),
-    Lat: Joi.number().required(),
-    Lng: Joi.number().required(),
-    Weather_Id: Joi.number().required(),
-    Weather_Main: Joi.string().required(),
-    Weather_Description: Joi.string().required(),
-    Weather_Icon: Joi.string().required(),
-    Main_Temp:Joi.number().required(),
-    Main_FeelsLike: Joi.number().required(),
-    Main_TempMax: Joi.number().required(),
-    Main_TempMin: Joi.number().required(),
-    Main_Pressure: Joi.number().required(),
-    Main_Humidity: Joi.number().required(),
-    Wind_Speed: Joi.number().required(),
-    Clouds_All: Joi.number().required(),
-    Sunrise: Joi.number().required(),
-    Sunset: Joi.number().required(),
-    Rain_1h: Joi.number().optional(),
+    type: Joi.string().optional(),
+    geometry: {
+      type: Joi.string().optional(),
+      coordinates: Joi.array().optional(),
+    },
+    properties: {
+      Id: Joi.number().optional(),
+      Type: Joi.string().optional(),
+      Weather_Id: Joi.number().optional(),
+      Weather_Main: Joi.string().optional(),
+      Weather_Description: Joi.string().optional(),
+      Weather_Icon: Joi.string().optional(),
+      Main_Temp: Joi.number().optional(),
+      Main_FeelsLike: Joi.number().optional(),
+      Main_TempMax: Joi.number().optional(),
+      Main_TempMin: Joi.number().optional(),
+      Main_Pressure: Joi.number().optional(),
+      Main_Humidity: Joi.number().optional(),
+      Wind_Speed: Joi.number().optional(),
+      Clouds_All: Joi.number().optional(),
+      Sunrise: Joi.number().optional(),
+      Sunset: Joi.number().optional(),
+      Current_Time: Joi.number().optional(),
+      Visibility: Joi.number().optional(),
+      Rain_1h: Joi.number().optional(),
+    },
   };
 
   return Joi.validate(weather, schema);
 }
 
-exports.WeatherKE = WeatherKE; 
+exports.WeatherKE = WeatherKE;
 exports.validate = validateWeatherKe;
