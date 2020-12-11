@@ -5,11 +5,11 @@ const router = express.Router();
 
 let weather = [];
 
-//for ChangeOfVariation
+
 router.get("/firstJSON/1", async (req, res) => {
   res.send(weather);
 });
-//for ChangeOfVariation
+
 router.post("/firstJSON/1", async (req, res) => {
   weather = req.body;
   //console.log(weather);
@@ -17,7 +17,7 @@ router.post("/firstJSON/1", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
-  //console.log(req.body);
+  console.log(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let weatherKe = new WeatherKE({

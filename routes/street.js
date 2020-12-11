@@ -2,16 +2,11 @@ const { MhdPoBus, validate } = require("../models/bus");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
-
+const street = require('../Data/uliceFinal.json')
 
 
 router.get("/", async (req, res) => {
-  fs.readFile("./Data/uliceFinal.json", async (err, data) => {
-    if (err) throw err;
-    let dataO =JSON.parse(data);
-    res.send(dataO);
-  });
+  res.send(street);
 });
 
 module.exports = router;
