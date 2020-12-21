@@ -8,6 +8,9 @@ const traffic = require('./routes/traffic');
 const weatherPO = require('./routes/weatherPo');
 const weatherKE = require('./routes/weatherKe');
 const Street  = require('./routes/street')
+const MhdStops  = require('./routes/stopsMhd')
+const SadStops  = require('./routes/stopsSAD')
+
 const Ubian  = require('./routes/ubian')
 
 const express = require('express');
@@ -22,6 +25,9 @@ mongoose.connect('mongodb://localhost/connectors')
 
 app.use(express.json());
 app.use("/api/v1/PresovStreets",Street)
+app.use("/api/v1/PresovStops",MhdStops)
+app.use("/api/v1/SadStops",SadStops)
+
 app.use('/api/v1/currentMhdPoBusses', MhdBusses);
 app.use('/api/v1/currentSadPoBusses', SadBusses);
 app.use('/api/v1/currentUbianBackup', Ubian);

@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-
 let busAll = [];
 
 //for ChangeOfVariation
@@ -17,24 +16,31 @@ router.post("/firstJSON/1", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-    console.log(req.body);
-    
+  console.log(req.body);
   let sadBus = new SadPoBus({
-    Line: req.body.Line,
-    Trip: req.body.Trip,
-    Delay: req.body.Delay,
-    Lat: req.body.Lat,
-    Lng: req.body.Lng,
-    Dir: req.body.Dir,
-    TripTime: req.body.TripTime,
-    From: req.body.From,
-    Via: req.body.Via,
-    To: req.body.To,
-    OrderInJsonId: req.body.OrderInJsonId,
-    Type: req.body.Type,
-    CurrentTime: req.body.CurrentTime,
+    type: req.body.type,
+    geometry: {
+      type: req.body.geometry.type,
+      coordinates: req.body.geometry.coordinates,
+    },
+    properties: {
+      Line: req.body.properties.Line,
+      Trip: req.body.properties.Trip,
+      Delay: req.body.properties.Delay,
+      Dir: req.body.properties.Dir,
+      TripTime: req.body.properties.TripTime,
+      From: req.body.properties.From,
+      Via: req.body.properties.Via,
+      To: req.body.properties.To,
+      Street: req.body.properties.Street,
+      Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
+      Type: req.body.properties.Type,
+      Current_Time: req.body.properties.Current_Time,
+      CHANGE_OF_Delay: req.body.properties.CHANGE_OF_Delay,
+    }
   });
   sadBus = await sadBus.save();
   res.send(req);
@@ -47,19 +53,26 @@ router.put("/:id", async (req, res) => {
   const bus = await SadPoBus.findByIdAndUpdate(
     req.params.id,
     {
-      Line: req.body.Line,
-      Trip: req.body.Trip,
-      Delay: req.body.Delay,
-      Lat: req.body.Lat,
-      Lng: req.body.Lng,
-      Dir: req.body.Dir,
-      TripTime: req.body.TripTime,
-      From: req.body.From,
-      Via: req.body.Via,
-      To: req.body.To,
-      OrderInJsonId: req.body.OrderInJsonId,
-      Type: req.body.Type,
-      CurrentTime: req.body.CurrentTime,
+      type: req.body.type,
+      geometry: {
+        type: req.body.geometry.type,
+        coordinates: req.body.geometry.coordinates,
+      },
+      properties: {
+        Line: req.body.properties.Line,
+      Trip: req.body.properties.Trip,
+      Delay: req.body.properties.Delay,
+      Dir: req.body.properties.Dir,
+      TripTime: req.body.properties.TripTime,
+      From: req.body.properties.From,
+      Via: req.body.properties.Via,
+      To: req.body.properties.To,
+      Street: req.body.properties.Street,
+      Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
+      Type: req.body.properties.Type,
+      Current_Time: req.body.properties.Current_Time,
+      CHANGE_OF_Delay: req.body.properties.CHANGE_OF_Delay,
+      },
     },
     { new: true }
   );

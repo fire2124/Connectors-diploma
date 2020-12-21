@@ -1,83 +1,100 @@
-const Joi = require('joi');
-const mongoose = require('mongoose');
+const Joi = require("joi");
+const mongoose = require("mongoose");
 
-const SadPoBus = mongoose.model('SadPoBus', new mongoose.Schema({
-  Line: {
-    type: String,
-    required: true,
-    maxlength: 10
-  },
-  Trip: {
-    type: Number,
-    required: false,
-  },
-  Delay: {
-    type: Number,
-    required: true,
-  },
-  Lat: {
-    type: Number,
-    required: true,
-  },
-  Lng: {
-    type: Number,
-    required: true,
-  },
-  Dir: {
-    type: Number,
-    required: true,
-  },
-  TripTime: {
-    type: Number,
-    required: true,
-  },
-  From: {
-    type: String,
-    required: true,
-  },
-  Via: {
-    type: String,
-    required: true,
-  },
-  To: {
-    type: String,
-    required: true,
-  },
-  OrderInJsonId: {
-    type: Number,
-    required: true,
-  },
-  Type: {
-    type: String,
-    required: true,
-  },
-  CurrentTime: {
-    type: Number,
-    required: true,
-  },
-
-  
-}));
+const SadPoBus = mongoose.model(
+  "SadPoBus",
+  new mongoose.Schema({
+    type: { type: String, required: false },
+    geometry: {
+      type: { type: String, require: false },
+      coordinates: {
+        type: Array,
+        required: false,
+      },   
+    },
+    properties: {
+      Line: {
+        type: String,
+        required: false,
+      },
+      Trip: {
+        type: Number,
+        required: false,
+      },
+      Delay: {
+        type: Number,
+        required: false,
+      },
+      Dir: {
+        type: Number,
+        required: false,
+      },
+      TripTime: {
+        type: Number,
+        required: false,
+      },
+      From: {
+        type: String,
+        required: false,
+      },
+      Via: {
+        type: String,
+        required: false,
+      },
+      To: {
+        type: String,
+        required: false,
+      },
+      Street: {
+        type: String,
+        required: false,
+      },
+      Order_In_Json_Id: {
+        type: Number,
+        required: false,
+      },
+      Type: {
+        type: String,
+        required: false,
+      },
+      Current_Time: {
+        type: Number,
+        required: false,
+      },
+      CHANGE_OF_Delay: {
+        type: Number,
+        required: false,
+      },
+    },
+  })
+);
 
 function validateSadPoBus(bus) {
   const schema = {
-    Line: Joi.string().max(10).required(),
-    Trip: Joi.number().required(),
-    Delay: Joi.number().required(),
-    Lat: Joi.number().required(),
-    Lng: Joi.number().required(),
-    Dir: Joi.number().required(),
-    TripTime:Joi.number().required(),
-    From: Joi.string().required(),
-    Via: Joi.string().optional(),
-    To: Joi.string().required(),
-    OrderInJsonId: Joi.number().required(),
-    Type: Joi.string().required(),
-    CurrentTime: Joi.number().required(),
+    type: Joi.string().optional(),
+    geometry: {
+      type: Joi.string().optional(),
+      coordinates: Joi.array().optional(),
+    },
+    properties: {
+      Line: Joi.string().optional(),
+      Trip: Joi.number().optional(),
+      Delay: Joi.number().optional(),
+      Dir: Joi.number().optional(),
+      TripTime: Joi.number().optional(),
+      From: Joi.string().optional(),
+      Via: Joi.string().optional(),
+      To: Joi.string().optional(),
+      Street:Joi.string().optional(),
+      Order_In_Json_Id: Joi.number().optional(),
+      Type: Joi.string().optional(),
+      Current_Time: Joi.number().optional(),
+      CHANGE_OF_Delay: Joi.number().optional(),
+    },
   };
 
   return Joi.validate(bus, schema);
 }
 
-exports.SadPoBus = SadPoBus; 
+exports.SadPoBus = SadPoBus;
 exports.validate = validateSadPoBus;

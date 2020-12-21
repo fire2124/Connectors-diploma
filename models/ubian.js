@@ -41,8 +41,8 @@ async function validateUbian(bus) {
   const schema = {
     type:  Joi.string().optional(),
     geometry: {
-      coordinates: Joi.array().optional(),
       type: Joi.string().optional(),
+      coordinates: Joi.array().optional(),
     },
     properties: {
       vehicleID: Joi.number().optional(),

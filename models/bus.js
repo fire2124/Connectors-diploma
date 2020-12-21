@@ -91,6 +91,10 @@ const MhdPoBus = mongoose.model(
         type: Number,
         required: false,
       },
+      VEHICLE_NUMBER:{
+        type: Number,
+        required: false,
+      },
     },
   })
 );
@@ -116,6 +120,7 @@ function validateBus(bus) {
       Current_Time: Joi.number().optional(),
       CHANGE_OF_Variation: Joi.number().optional(),
       Street: Joi.string().optional(),
+      VEHICLE_NUMBER:Joi.number().optional(),
     },
     geometry: {
       type: Joi.string().optional(),
