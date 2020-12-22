@@ -7,11 +7,12 @@ const Trains = require('./routes/train');
 const traffic = require('./routes/traffic');
 const weatherPO = require('./routes/weatherPo');
 const weatherKE = require('./routes/weatherKe');
+const Ubian  = require('./routes/ubian')
+
 const Street  = require('./routes/street')
 const MhdStops  = require('./routes/stopsMhd')
 const SadStops  = require('./routes/stopsSAD')
-
-const Ubian  = require('./routes/ubian')
+const TrainStops= require('./routes/stopsTrains')
 
 const express = require('express');
 const app = express();
@@ -20,13 +21,14 @@ const app = express();
 
 mongoose.connect('mongodb://localhost/connectors')
  .then(() => console.log('Connected to MongoDB...'))
- .catch(err => console.error('Could not connect to MongoDB...'));
+ .catch(err => console.error(`Could not connect to MongoDB... ${err}`));
 
 
 app.use(express.json());
 app.use("/api/v1/PresovStreets",Street)
 app.use("/api/v1/PresovStops",MhdStops)
 app.use("/api/v1/SadStops",SadStops)
+app.use("/api/v1/TrainStops",TrainStops)
 
 app.use('/api/v1/currentMhdPoBusses', MhdBusses);
 app.use('/api/v1/currentSadPoBusses', SadBusses);

@@ -18,21 +18,15 @@ router.post("/firstJSON/1", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log(req.body)
 
- let json = Promise.resolve(req) // unhandle reject 
- let err = Promise.reject(req)
-
- if (err) return res.status(400).send(error);
-
-
-  const { error } = validate(json.body);
+  const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   let traffic = new Traffic({
+    type: req.body.type,
     geometry: {
       type: req.body.geometry.type,
       coordinates: req.body.geometry.coordinates,
     },
-    type: req.body.type,
     properties: {
       region_ID: req.body.properties.region_ID,
       region_name: req.body.properties.region_name,
@@ -42,8 +36,8 @@ router.post("/", async (req, res) => {
       district_Name: req.body.properties.district_Name,
       district_AreaLevel: req.body.properties.district_AreaLevel,
       delaySeconds: req.body.properties.delaySeconds,
-      district_Parent_ID: req.body.properties.district_Parent_ID,
-      district_Parent_Name: req.body.properties.district_Perent_Name,
+      // district_Parent_ID: req.body.properties.district_Parent_ID,
+      // district_Parent_Name: req.body.properties.district_Perent_Name,
       category_Code: req.body.properties.category_Code,
       category_Name: req.body.properties.category_Name,
       status_Code: req.body.properties.status_Code,
@@ -69,11 +63,11 @@ router.put("/:id", async (req, res) => {
   const traffic = await Traffic.findByIdAndUpdate(
     req.params.id,
     {
+      type: req.body.type,
       geometry: {
         type: req.body.geometry.type,
         coordinates: req.body.geometry.coordinates,
       },
-      type: req.body.type,
       properties: {
         region_ID: req.body.properties.region_ID,
         region_name: req.body.properties.region_name,
@@ -83,8 +77,8 @@ router.put("/:id", async (req, res) => {
         district_Name: req.body.properties.district_Name,
         district_AreaLevel: req.body.properties.district_AreaLevel,
         delaySeconds: req.body.properties.delaySeconds,
-        district_Parent_ID: req.body.properties.district_Parent_ID,
-        district_Parent_Name: req.body.properties.district_Perent_Name,
+        // district_Parent_ID: req.body.properties.district_Parent_ID,
+        // district_Parent_Name: req.body.properties.district_Perent_Name,
         category_Code: req.body.properties.category_Code,
         category_Name: req.body.properties.category_Name,
         status_Code: req.body.properties.status_Code,
