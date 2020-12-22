@@ -13,6 +13,7 @@ router.get("/firstJSON/1", async (req, res) => {
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   busAll = req.body;
+  res.status(201).send("created");
 });
 
 //postOneByOne
@@ -51,7 +52,7 @@ router.post("/", async (req, res) => {
   });
   try {
     mhdPoBus = await mhdPoBus.save();
-    res.send("200");
+    res.status(201).send("created");
   } catch (e) {
     console.log(e)
   }

@@ -14,6 +14,7 @@ router.get("/firstJSON/1", async (req, res) => {
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   trainAll = req.body;
+  res.status(201).send("created");
 });
 
 router.post("/", async (req, res) => {
@@ -48,7 +49,7 @@ router.post("/", async (req, res) => {
     }
     });
   train = await train.save();
-  res.send(req);
+  res.status(201).send("created");
 });
 
 router.put("/:id", async (req, res) => {

@@ -13,6 +13,7 @@ router.get("/firstJSON/1", async (req, res) => {
 router.post("/firstJSON/1", async (req, res) => {
   weather = req.body;
   //console.log(weather);
+  res.status(201).send("created");
 });
 
 router.post("/", async (req, res) => {
@@ -49,7 +50,7 @@ router.post("/", async (req, res) => {
     },
   });
   weatherPO = await weatherPO.save();
-  res.send(req);
+  res.status(201).send("created");
 });
 
 router.put("/:id", async (req, res) => {

@@ -13,6 +13,7 @@ router.get("/firstJSON/1", async (req, res) => {
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   busAll = req.body;
+  res.status(201).send("created");
 });
 
 router.post("/", async (req, res) => {
@@ -43,7 +44,7 @@ router.post("/", async (req, res) => {
     }
   });
   sadBus = await sadBus.save();
-  res.send(req);
+  res.status(201).send("created");
 });
 
 router.put("/:id", async (req, res) => {

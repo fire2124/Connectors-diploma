@@ -13,10 +13,11 @@ router.get("/firstJSON/1", async (req, res) => {
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   traffic = req.body;
+  res.status(201).send("created");
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
 
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -24,8 +25,8 @@ router.post("/", async (req, res) => {
   let traffic = new Traffic({
     type: req.body.type,
     geometry: {
-      type: req.body.geometry.type,
-      coordinates: req.body.geometry.coordinates,
+      type: req.body.geometry ? req.body.geometry.type : null,
+      coordinates: req.body.geometry ? req.body.geometry.coordinates : null,
     },
     properties: {
       region_ID: req.body.properties.region_ID,
@@ -36,8 +37,6 @@ router.post("/", async (req, res) => {
       district_Name: req.body.properties.district_Name,
       district_AreaLevel: req.body.properties.district_AreaLevel,
       delaySeconds: req.body.properties.delaySeconds,
-      // district_Parent_ID: req.body.properties.district_Parent_ID,
-      // district_Parent_Name: req.body.properties.district_Perent_Name,
       category_Code: req.body.properties.category_Code,
       category_Name: req.body.properties.category_Name,
       status_Code: req.body.properties.status_Code,
@@ -48,12 +47,14 @@ router.post("/", async (req, res) => {
       typePoly: req.body.properties.typePoly,
       coordinatesMulti: req.body.properties.coordinatesMulti,
       typeMulti: req.body.properties.typeMulti,
+      city: req.body.properties.city,
+      street: req.body.properties.street,
       houseNoFirst: req.body.properties.houseNoFirst,
       houseNoSecond: req.body.properties.houseNoSecond,
     },
   });
   traffic = await traffic.save();
-  res.send(req);
+  res.status(201).send("created");
 });
 
 router.put("/:id", async (req, res) => {
@@ -65,8 +66,8 @@ router.put("/:id", async (req, res) => {
     {
       type: req.body.type,
       geometry: {
-        type: req.body.geometry.type,
-        coordinates: req.body.geometry.coordinates,
+        type: req.body.geometry ? req.body.geometry.type : null,
+      coordinates: req.body.geometry ? req.body.geometry.coordinates : null,
       },
       properties: {
         region_ID: req.body.properties.region_ID,
@@ -77,8 +78,6 @@ router.put("/:id", async (req, res) => {
         district_Name: req.body.properties.district_Name,
         district_AreaLevel: req.body.properties.district_AreaLevel,
         delaySeconds: req.body.properties.delaySeconds,
-        // district_Parent_ID: req.body.properties.district_Parent_ID,
-        // district_Parent_Name: req.body.properties.district_Perent_Name,
         category_Code: req.body.properties.category_Code,
         category_Name: req.body.properties.category_Name,
         status_Code: req.body.properties.status_Code,
@@ -89,6 +88,8 @@ router.put("/:id", async (req, res) => {
         typePoly: req.body.properties.typePoly,
         coordinatesMulti: req.body.properties.coordinatesMulti,
         typeMulti: req.body.properties.typeMulti,
+        city: req.body.properties.city,
+        street: req.body.properties.street,
         houseNoFirst: req.body.properties.houseNoFirst,
         houseNoSecond: req.body.properties.houseNoSecond,
       },
