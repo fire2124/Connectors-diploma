@@ -42,10 +42,9 @@ router.post("/", async (req, res) => {
       CasPlanTime: req.body.properties.CasPlanTime,
       From: req.body.properties.From,
       To: req.body.properties.To,
-      Current_Time: req.body.properties.Current_Time,
       Type: req.body.properties.Type,
-      Order_In_JsonId: req.body.properties.Order_In_JsonId,
       CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+      Current_Time: req.body.properties.Current_Time,
     }
     });
   train = await train.save();
@@ -79,10 +78,9 @@ router.put("/:id", async (req, res) => {
         CasPlanTime: req.body.properties.CasPlanTime,
         From: req.body.properties.From,
         To: req.body.properties.To,
-        Current_Time: req.body.properties.Current_Time,
         Type: req.body.properties.Type,
-        Order_In_JsonId: req.body.properties.Order_In_JsonId,
         CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+        Current_Time: req.body.properties.Current_Time,
       }
     },
     { new: true }

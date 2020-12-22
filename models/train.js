@@ -75,10 +75,7 @@ const Train = mongoose.model(
         type: String,
         required: false,
       },
-      Current_Time: {
-        type: Number,
-        required: false,
-      },
+      
       Type: {
         type: String,
         required: false,
@@ -88,6 +85,10 @@ const Train = mongoose.model(
         required: false,
       },
       CHANGE_OF_Variation: {
+        type: Number,
+        required: false,
+      },
+      Current_Time: {
         type: Number,
         required: false,
       },
@@ -117,10 +118,9 @@ function validateTrain(train) {
       CasPlanTime: Joi.string().optional(),
       From: Joi.string().optional(),
       To: Joi.string().optional(),
-      Current_Time: Joi.number().optional(),
       Type: Joi.string().optional(),
-      Order_In_JsonId: Joi.number().optional(),
       CHANGE_OF_Variation: Joi.number().optional(),
+      Current_Time: Joi.number().optional(),
     },
   };
 
