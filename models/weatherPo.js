@@ -71,6 +71,10 @@ const WeatherPO = mongoose.model(
         type: Number,
         required: false,
       },
+      Wind_Deg:{
+        type: Number,
+        required: false,
+      },
       Clouds_All: {
         type: Number,
         required: false,
@@ -120,6 +124,7 @@ function validateWeatherPO(weather) {
       Main_Pressure: Joi.number().optional(),
       Main_Humidity: Joi.number().optional(),
       Wind_Speed: Joi.number().optional(),
+      Wind_Deg: Joi.number().optional(),
       Clouds_All: Joi.number().optional(),
       Sunrise: Joi.number().optional(),
       Sunset: Joi.number().optional(),

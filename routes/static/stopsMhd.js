@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const stops = require('../Data/TrainZAS.json')
+const stops = require('../../Data/MhdZAS.json')
 
 
 router.get("/", async (req, res) => {

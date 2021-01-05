@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const street = require('../Data/uliceFinal.json')
+const stops = require('../../Data/TrainZAS.json')
 
 
 router.get("/", async (req, res) => {
-  res.send(street);
+  res.send(stops);
 });
 
 module.exports = router;

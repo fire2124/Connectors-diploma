@@ -7,17 +7,17 @@ const Trains = require('./routes/train');
 const traffic = require('./routes/traffic');
 const weatherPO = require('./routes/weatherPo');
 const weatherKE = require('./routes/weatherKe');
+const weather = require('./routes/weather');
 const Ubian  = require('./routes/ubian')
+const bst  = require('./routes/bst')
 
-const Street  = require('./routes/street')
-const MhdStops  = require('./routes/stopsMhd')
-const SadStops  = require('./routes/stopsSAD')
-const TrainStops= require('./routes/stopsTrains')
+const Street  = require('./routes/static/street')
+const MhdStops  = require('./routes/static/stopsMhd')
+const SadStops  = require('./routes/static/stopsSAD')
+const TrainStops= require('./routes/static/stopsTrains')
 
 const express = require('express');
 const app = express();
-
-
 
 mongoose.connect('mongodb://localhost/connectors')
  .then(() => console.log('Connected to MongoDB...'))
@@ -35,9 +35,11 @@ app.use('/api/v1/currentSadPoBusses', SadBusses);
 app.use('/api/v1/currentUbianBackup', Ubian);
 app.use('/api/v1/currentTrains', Trains);
 app.use('/api/v1/currentTraffic', traffic);
+app.use('/api/v1/currentWeather', weather);
 app.use('/api/v1/currentWeatherPo', weatherPO);
 app.use('/api/v1/currentWeatherKe', weatherKE);
+app.use('/api/v1/currentBst', bst);
 
 
-const port = process.env.PORT || 9200;
+const port = process.env.PORT || 9500;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

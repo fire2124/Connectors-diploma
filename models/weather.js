@@ -1,8 +1,8 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
-const WeatherKE = mongoose.model(
-  "WeatherKE",
+const Weather = mongoose.model(
+  "Weather",
   new mongoose.Schema({
     type: {
       type: String,
@@ -103,7 +103,7 @@ const WeatherKE = mongoose.model(
   })
 );
 
-function validateWeatherKe(weather) {
+function validateWeather(weather) {
   const schema = {
     type: Joi.string().optional(),
     geometry: {
@@ -137,5 +137,5 @@ function validateWeatherKe(weather) {
   return Joi.validate(weather, schema);
 }
 
-exports.WeatherKE = WeatherKE;
-exports.validate = validateWeatherKe;
+exports.Weather = Weather;
+exports.validate = validateWeather;

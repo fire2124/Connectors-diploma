@@ -19,6 +19,7 @@ router.post("/firstJSON/1", async (req, res) => {
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  console.log(req.body)
   let sadBus = new Ubian({
     type: req.body.type,
     geometry: {

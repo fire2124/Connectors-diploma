@@ -1,27 +1,16 @@
-const { WeatherPO, validate } = require("../models/weatherPo");
+const { Weather, validate } = require("../models/weather");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-let weather = [];
 
-//for ChangeOfVariation
-router.get("/firstJSON/1", async (req, res) => {
-  res.send(weather);
-});
-//for ChangeOfVariation
-router.post("/firstJSON/1", async (req, res) => {
-  weather = req.body;
-  //console.log(weather);
-  res.status(201).send("created");
-});
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   console.log(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let weatherPO = new WeatherPO({
+  let weather = new Weather({
     type: req.body.type,
     geometry: {
       type: req.body.geometry.type,
@@ -41,7 +30,7 @@ router.post("/", async (req, res) => {
       Main_Pressure: req.body.properties.Main_Pressure,
       Main_Humidity: req.body.properties.Main_Humidity,
       Wind_Speed: req.body.properties.Wind_Speed,
-      Wind_Deg: req.body.properties.Wind_Speed,
+      Wind_Deg:  req.body.properties.Wind_Deg,
       Clouds_All: req.body.properties.Clouds_All,
       Sunrise: req.body.properties.Sunrise,
       Sunset: req.body.properties.Sunset,
@@ -50,15 +39,15 @@ router.post("/", async (req, res) => {
       Visibility: req.body.properties.Visibility,
     },
   });
-  weatherPO = await weatherPO.save();
+  weather = await weather.save();
   res.status(201).send("created");
 });
 
 router.put("/:id", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log(req.body)
-  const weatherPO = await WeatherPO.findByIdAndUpdate(
+
+  const weather = await Weather.findByIdAndUpdate(
     req.params.id,
     {
       type: req.body.type,
@@ -74,13 +63,13 @@ router.put("/:id", async (req, res) => {
         Weather_Description: req.body.properties.Weather_Description,
         Weather_Icon: req.body.properties.Weather_Icon,
         Main_Temp: req.body.properties.Main_Temp,
-        Main_FeelsLike: req.body.properties.Main_FeelsLike,
+        Main_FeelsLi: req.body.properties.Main_FeelsLi,
         Main_TempMax: req.body.properties.Main_TempMax,
         Main_TempMin: req.body.properties.Main_TempMin,
         Main_Pressure: req.body.properties.Main_Pressure,
         Main_Humidity: req.body.properties.Main_Humidity,
         Wind_Speed: req.body.properties.Wind_Speed,
-        Wind_Deg: req.body.properties.Wind_Deg,
+        Wind_Deg:  req.body.properties.Wind_Deg,
         Clouds_All: req.body.properties.Clouds_All,
         Sunrise: req.body.properties.Sunrise,
         Sunset: req.body.properties.Sunset,
@@ -91,35 +80,35 @@ router.put("/:id", async (req, res) => {
     { new: true }
   );
 
-  if (!weatherPO)
+  if (!weather)
     return res
       .status(404)
-      .send("The WeatherPO with the given ID was not found.");
+      .send("The Weather with the given ID was not found.");
 
-  res.send(weatherPO);
+  res.send(weather);
 });
 
 router.delete("/:id", async (req, res) => {
-  const weatherPO = await WeatherPO.findByIdAndRemove(req.params.id);
+  const weather = await Weather.findByIdAndRemove(req.params.id);
 
-  if (!weatherPO)
+  if (!weather)
     return res
       .status(404)
-      .send("The WeatherPO with the given ID was not found.");
+      .send("The Weather with the given ID was not found.");
 
-  res.send(weatherPO);
+  res.send(weather);
 });
 
 router.get("/:id", async (req, res) => {
-  const weatherPO = await WeatherPO.findById(req.params.Id);
-  console.log(weatherPO);
+  const weather = await Weather.findById(req.params.Id);
+  console.log(weather);
 
-  if (!weatherPO)
+  if (!weather)
     return res
       .status(404)
-      .send("The WeatherPO with the given ID was not found.");
+      .send("The Weather with the given ID was not found.");
 
-  res.send(weatherPO);
+  res.send(weather);
 });
 
 module.exports = router;

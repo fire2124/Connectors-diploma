@@ -75,13 +75,8 @@ const Train = mongoose.model(
         type: String,
         required: false,
       },
-      
       Type: {
         type: String,
-        required: false,
-      },
-      Order_In_JsonId: {
-        type: Number,
         required: false,
       },
       CHANGE_OF_Variation: {
