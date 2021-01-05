@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     },
     properties: {
       Nazov: req.body.properties.Nazov,
-      Meska: req.body.properties.Meska,
+      DELAY: req.body.properties.DELAY,
       MeskaText: req.body.properties.MeskaText,
       Current_Stop: req.body.properties.Current_Stop,
       Dopravca: req.body.properties.Dopravca,
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
       From: req.body.properties.From,
       To: req.body.properties.To,
       Type: req.body.properties.Type,
-      CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+      CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
       Current_Time: req.body.properties.Current_Time,
     }
     });
@@ -66,7 +66,7 @@ router.put("/:id", async (req, res) => {
       },
       properties: {
         Nazov: req.body.properties.Nazov,
-        Meska: req.body.properties.Meska,
+        DELAY: req.body.properties.DELAY,
         MeskaText: req.body.properties.MeskaText,
         Current_Stop: req.body.properties.Current_Stop,
         Dopravca: req.body.properties.Dopravca,
@@ -80,7 +80,7 @@ router.put("/:id", async (req, res) => {
         From: req.body.properties.From,
         To: req.body.properties.To,
         Type: req.body.properties.Type,
-        CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+        CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
         Current_Time: req.body.properties.Current_Time,
       }
     },

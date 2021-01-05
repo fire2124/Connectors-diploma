@@ -14,7 +14,7 @@ const Ubian = mongoose.model(
     },
     properties: {
       vehicleID: { type: Number, require: false },
-      delay: { type: Number, require: false },
+      DELAY: { type: Number, require: false },
       lastCommunication: { type: String, require: false },
       lastStopOrder: { type: Number, require: false },
       isOnStop: { type: Boolean, require: false },
@@ -28,10 +28,10 @@ const Ubian = mongoose.model(
       lineID: { type: Number, require: false },
       lineType: { type: Number, require: false },
       type: { type: String, require: false },
-      lineNumber: { type: Number, require: false },
+      ROUTE_NUMBER: { type: Number, require: false },
       Current_Time: { type: Number, require: false },
       Order_In_Json_Id: { type: Number, require: false },
-      CHANGE_OF_Variation: { type: Number, require: false },
+      CHANGE_OF_DELAY: { type: Number, require: false },
       Street:{ type: String, require: false },
     },
   })
@@ -46,7 +46,7 @@ async function validateUbian(bus) {
     },
     properties: {
       vehicleID: Joi.number().optional(),
-      delay: Joi.number().optional(),
+      DELAY: Joi.number().optional(),
       lastCommunication: Joi.string().optional(),
       lastStopOrder: Joi.number().optional(),
       isOnStop: Joi.boolean().optional(),
@@ -60,10 +60,10 @@ async function validateUbian(bus) {
       lineID: Joi.number().optional(),
       lineType: Joi.number().optional(),
       type: Joi.string().optional(),
-      lineNumber: Joi.number().optional(),
+      ROUTE_NUMBER: Joi.number().optional(),
       Current_Time: Joi.number().optional(),
       Order_In_Json_Id: Joi.number().optional(),
-      CHANGE_OF_Variation: Joi.number().optional(),
+      CHANGE_OF_DELAY: Joi.number().optional(),
       Street:Joi.string().optional(),
     }
   };

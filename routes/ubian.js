@@ -5,11 +5,11 @@ const router = express.Router();
 
 let busAll = [];
 
-//for ChangeOfVariation
+//for ChangeOfDELAY
 router.get("/firstJSON/1", async (req, res) => {
   res.send(busAll);
 });
-//for ChangeOfVariation
+//for ChangeOfDELAY
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   busAll = req.body;
@@ -19,7 +19,7 @@ router.post("/firstJSON/1", async (req, res) => {
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log(req.body)
+  console.log(req.body);
   let sadBus = new Ubian({
     type: req.body.type,
     geometry: {
@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     },
     properties: {
       vehicleID: req.body.properties.vehicleID,
-      delay: req.body.properties.delay,
+      DELAY: req.body.properties.DELAY,
       lastCommunication: req.body.properties.lastCommunication,
       lastStopOrder: req.body.properties.lastStopOrder,
       isOnStop: req.body.properties.isOnStop,
@@ -37,15 +37,15 @@ router.post("/", async (req, res) => {
       destination: req.body.properties.destination,
       destinationStopName: req.body.properties.destinationStopName,
       destinationCityName: req.body.properties.destinationCityName,
-      from: req.body.properties.from,
-      via: req.body.properties.via ? req.body.properties.via : null,
+      From: req.body.properties.From,
+      Via: req.body.properties.Via ? req.body.properties.Via : null,
       lineID: req.body.properties.lineID,
       lineType: req.body.properties.lineType,
       type: req.body.properties.type,
-      lineNumber: req.body.properties.lineNumber,
+      ROUTE_NUMBER: req.body.properties.ROUTE_NUMBER,
       Current_Time: req.body.properties.Current_Time,
       Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
-      CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+      CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
       Street: req.body.properties.Street,
     },
   });
@@ -69,7 +69,7 @@ router.put("/:id", async (req, res) => {
       },
       properties: {
         vehicleID: req.body.properties.vehicleID,
-        delay: req.body.properties.delay,
+        DELAY: req.body.properties.DELAY,
         lastCommunication: req.body.properties.lastCommunication,
         lastStopOrder: req.body.properties.lastStopOrder,
         isOnStop: req.body.properties.isOnStop,
@@ -78,15 +78,15 @@ router.put("/:id", async (req, res) => {
         destination: req.body.properties.destination,
         destinationStopName: req.body.properties.destinationStopName,
         destinationCityName: req.body.properties.destinationCityName,
-        from: req.body.properties.from,
-        via: req.body.properties.via,
+        From: req.body.properties.From,
+        Via: req.body.properties.Via ? req.body.properties.Via : null,
         lineID: req.body.properties.lineID,
         lineType: req.body.properties.lineType,
         type: req.body.properties.type,
-        lineNumber: req.body.properties.lineNumber,
+        ROUTE_NUMBER: req.body.properties.ROUTE_NUMBER,
         Current_Time: req.body.properties.Current_Time,
         Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
-        CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+        CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
         Street: req.body.properties.Street,
       },
     },

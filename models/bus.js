@@ -21,7 +21,7 @@ const MhdPoBus = mongoose.model(
     properties: {
       ROUTE_NUMBER: {
         type: String,
-        optional: false
+        required: false
       },
       PLANNED_START: {
         type: String,
@@ -67,11 +67,11 @@ const MhdPoBus = mongoose.model(
         type: Number,
         required: false,
       },
-      VARIATION: {
+      DELAY: {
         type: Number,
         required: false,
       },
-      CHANGE_OF_Variation: {
+      CHANGE_OF_DELAY: {
         type: Number,
         required: false,
       },
@@ -102,7 +102,7 @@ const MhdPoBus = mongoose.model(
 function validateBus(bus) {
   const schema = {
     properties: {
-      ROUTE_NUMBER: Joi.optional(),
+      ROUTE_NUMBER: Joi.string().optional(),
       PLANNED_START: Joi.string().optional(),
       DIRECTION: Joi.string().optional(),
       BUS_STOP_ORDER_NUM: Joi.number().optional(),
@@ -114,11 +114,11 @@ function validateBus(bus) {
       BUS_STOP_SUB_NUM_2: Joi.number().optional(),
       PLANNED_ROAD: Joi.number().optional(),
       REAL_ROAD: Joi.number().optional(),
-      VARIATION: Joi.number().optional(),
+      DELAY: Joi.number().optional(),
       Order_In_Json_Id: Joi.number().optional(),
       Type: Joi.string().optional(),
       Current_Time: Joi.number().optional(),
-      CHANGE_OF_Variation: Joi.number().optional(),
+      CHANGE_OF_DELAY: Joi.number().optional(),
       Street: Joi.string().optional(),
       VEHICLE_NUMBER:Joi.number().optional(),
     },

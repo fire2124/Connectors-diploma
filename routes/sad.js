@@ -17,7 +17,6 @@ router.post("/firstJSON/1", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
   console.log(req.body);
@@ -30,7 +29,7 @@ router.post("/", async (req, res) => {
     properties: {
       Line: req.body.properties.Line,
       Trip: req.body.properties.Trip,
-      Delay: req.body.properties.Delay,
+      DELAY: req.body.properties.DELAY,
       Dir: req.body.properties.Dir,
       TripTime: req.body.properties.TripTime,
       From: req.body.properties.From,
@@ -40,8 +39,8 @@ router.post("/", async (req, res) => {
       Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
       Type: req.body.properties.Type,
       Current_Time: req.body.properties.Current_Time,
-      CHANGE_OF_Delay: req.body.properties.CHANGE_OF_Delay,
-    }
+      CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
+    },
   });
   sadBus = await sadBus.save();
   res.status(201).send("created");
@@ -61,18 +60,18 @@ router.put("/:id", async (req, res) => {
       },
       properties: {
         Line: req.body.properties.Line,
-      Trip: req.body.properties.Trip,
-      Delay: req.body.properties.Delay,
-      Dir: req.body.properties.Dir,
-      TripTime: req.body.properties.TripTime,
-      From: req.body.properties.From,
-      Via: req.body.properties.Via,
-      To: req.body.properties.To,
-      Street: req.body.properties.Street,
-      Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
-      Type: req.body.properties.Type,
-      Current_Time: req.body.properties.Current_Time,
-      CHANGE_OF_Delay: req.body.properties.CHANGE_OF_Delay,
+        Trip: req.body.properties.Trip,
+        DELAY: req.body.properties.DELAY,
+        Dir: req.body.properties.Dir,
+        TripTime: req.body.properties.TripTime,
+        From: req.body.properties.From,
+        Via:req.body.properties.Via ? req.body.properties.Via : null,
+        To: req.body.properties.To,
+        Street: req.body.properties.Street,
+        Order_In_Json_Id: req.body.properties.Order_In_Json_Id,
+        Type: req.body.properties.Type,
+        Current_Time: req.body.properties.Current_Time,
+        CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
       },
     },
     { new: true }

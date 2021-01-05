@@ -23,7 +23,7 @@ const Train = mongoose.model(
         type: String,
         required: false,
       },
-      Meska: {
+      DELAY: {
         type: Number,
         required: false,
       },
@@ -79,7 +79,7 @@ const Train = mongoose.model(
         type: String,
         required: false,
       },
-      CHANGE_OF_Variation: {
+      CHANGE_OF_DELAY: {
         type: Number,
         required: false,
       },
@@ -100,7 +100,7 @@ function validateTrain(train) {
     },
     properties: {
       Nazov: Joi.string().optional(),
-      Meska: Joi.number().optional(),
+      DELAY: Joi.number().optional(),
       MeskaText: Joi.string().optional(),
       Current_Stop: Joi.string().optional(),
       Dopravca: Joi.string().optional(),
@@ -114,7 +114,7 @@ function validateTrain(train) {
       From: Joi.string().optional(),
       To: Joi.string().optional(),
       Type: Joi.string().optional(),
-      CHANGE_OF_Variation: Joi.number().optional(),
+      CHANGE_OF_DELAY: Joi.number().optional(),
       Current_Time: Joi.number().optional(),
     },
   };

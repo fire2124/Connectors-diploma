@@ -5,11 +5,11 @@ const router = express.Router();
 
 let busAll = [];
 
-//for ChangeOfVariation
+//for ChangeOfDELAY
 router.get("/firstJSON/1", async (req, res) => {
   res.send(busAll);
 });
-//for ChangeOfVariation
+//for ChangeOfDELAY
 router.post("/firstJSON/1", async (req, res) => {
   //console.log(req.body);
   busAll = req.body;
@@ -42,8 +42,8 @@ router.post("/", async (req, res) => {
       PLANNED_ROAD: req.body.properties.PLANNED_ROAD,
       REAL_ROAD: req.body.properties.REAL_ROAD,
       VEHICLE_NUMBER: req.body.properties.VEHICLE_NUMBER,
-      VARIATION: req.body.properties.VARIATION,
-      CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+      DELAY: req.body.properties.DELAY,
+      CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
       Street: req.body.properties.Street,
       Order_In_Json_Id: req.body.properties.OrderInJsonId,
       Type: req.body.properties.Type,
@@ -85,8 +85,8 @@ router.put("/:id", async (req, res) => {
         PLANNED_ROAD: req.body.properties.PLANNED_ROAD,
         REAL_ROAD: req.body.properties.REAL_ROAD,
         VEHICLE_NUMBER: req.body.properties.VEHICLE_NUMBER,
-        VARIATION: req.body.properties.VARIATION,
-        CHANGE_OF_Variation: req.body.properties.CHANGE_OF_Variation,
+        DELAY: req.body.properties.DELAY,
+        CHANGE_OF_DELAY: req.body.properties.CHANGE_OF_DELAY,
         Street: req.body.properties.Street,
         Order_In_Json_Id: req.body.properties.OrderInJsonId,
         Type: req.body.properties.Type,

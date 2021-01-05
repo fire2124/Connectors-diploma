@@ -21,7 +21,7 @@ const SadPoBus = mongoose.model(
         type: Number,
         required: false,
       },
-      Delay: {
+      DELAY: {
         type: Number,
         required: false,
       },
@@ -61,7 +61,7 @@ const SadPoBus = mongoose.model(
         type: Number,
         required: false,
       },
-      CHANGE_OF_Delay: {
+      CHANGE_OF_DELAY: {
         type: Number,
         required: false,
       },
@@ -79,7 +79,7 @@ function validateSadPoBus(bus) {
     properties: {
       Line: Joi.string().optional(),
       Trip: Joi.number().optional(),
-      Delay: Joi.number().optional(),
+      DELAY: Joi.number().optional(),
       Dir: Joi.number().optional(),
       TripTime: Joi.number().optional(),
       From: Joi.string().optional(),
@@ -89,7 +89,7 @@ function validateSadPoBus(bus) {
       Order_In_Json_Id: Joi.number().optional(),
       Type: Joi.string().optional(),
       Current_Time: Joi.number().optional(),
-      CHANGE_OF_Delay: Joi.number().optional(),
+      CHANGE_OF_DELAY: Joi.number().optional(),
     },
   };
 
