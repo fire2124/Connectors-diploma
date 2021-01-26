@@ -11,8 +11,8 @@ router.get("/firstJSON/1", async (req, res) => {
 });
 //for ChangeOfDELAY
 router.post("/firstJSON/1", async (req, res) => {
-  //console.log(req.body);
   busAll = req.body;
+  console.log(busAll);
   res.status(201).send("created");
 });
 
@@ -20,7 +20,10 @@ router.post("/firstJSON/1", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log(req.body);
   const { error } = validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) {
+    console.log(error.details[0].message);
+    return res.status(400).send(error.details[0].message);
+  }
 
   let mhdPoBus = new MhdPoBus({
     type: req.body.type,
